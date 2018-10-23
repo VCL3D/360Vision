@@ -47,25 +47,21 @@ def get_shape(depth):
     return height, width
 
 def calcAbsRel(gt, pred, count):
-    abs_rel = np.sum(np.abs((pred - gt)) / gt)
-    abs_rel = abs_rel / count
+    abs_rel = np.mean(np.abs((pred - gt)) / gt)
     return abs_rel
 
 def calcSqRel(gt, pred, count):
-    sq_rel = np.sum(np.square(np.abs(gt - pred)) / gt)
-    sq_rel = sq_rel / count
+    sq_rel = np.mean(np.square(np.abs(pred - gt)) / gt)
     return sq_rel
 
 def calcRMSE(gt, pred, count):
-    rmse = np.sum(np.square(np.abs(pred - gt)))
-    rmse = rmse / count
+    rmse = np.mean(np.square(np.abs(pred - gt)))
     rmse = math.sqrt(rmse)
     return rmse
 
 def calcRMSELog(gt, pred, count):
-    mask = pred > 0.0
-    rmse = np.sum(np.square(np.log(pred[mask]) - np.log(gt[mask])))
-    rmse = rmse / count
+    mask = pred > 0.0 & gt > 0.0
+    rmse = np.mean(np.square(np.log(pred[mask]) - np.log(gt[mask])))
     rmse = math.sqrt(rmse)
     return rmse
 
@@ -75,7 +71,8 @@ def calcDelta(gt, pred, threshold, count):
     return delta
 
 def calcDeltaSecondOrder(gt, pred, threshold, count):
-    thresh = np.maximum((gt / pred), (pred / gt))
+    mask = pred != 0.0
+    thresh = np.maximum((gt[mask] / pred[mask]), (pred[mask] / gt[mask]))
     delta = (thresh < DELTA_THRESH ** 2).mean()
     return delta
 
@@ -90,10 +87,9 @@ def scale_median(gt_depth, pred_depth):
     s = gt_med / pred_med
     return gt_depth, pred_depth * s
 
-def mask_gt_depth(gt_depth, mask_thresh):
-    mask = (gt_depth < mask_thresh)
-    gt_depth = gt_depth[mask]
-    return gt_depth, mask
+def mask_depth(depth, mask_thresh):
+    mask = (depth < mask_thresh)
+    return mask
 
 def scaleMinMax(gt, pred):
     gt_min = np.min(gt)
@@ -149,9 +145,11 @@ def main():
         gt_depth, pred_depth = load_depths(gt_path, pred_path)
 
         # mask ground truth depth invalid entries
-        gt_depth, mask = mask_gt_depth(gt_depth, MASK_THRESH)
+        pred_mask = mask_depth(pred_depth, MASK_THRESH)
+        gt_mask = mask_depth(gt_depth, MASK_THRESH)
+        mask = pred_mask & gt_mask
         pred_depth = pred_depth[mask]
-
+        gt_depth = gt_depth[mask]
         # median scaling
         gt_depth, pred_depth = scale_median(gt_depth, pred_depth)
 
