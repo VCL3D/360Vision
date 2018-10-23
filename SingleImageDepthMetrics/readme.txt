@@ -5,7 +5,8 @@ N. Zioulis, A. Karakottas, D. Zarpalas, P. Daras,
 European Conference on Computer Vision (ECCV), Munich, Germany, 8 – 14 September 2018
 
 Unfortunately, we identified a bug in the script before uploading it. 
-The bug is fixed; however the tables in the above publication are slightly modified when running this script. Specifically, the the following tables are valid:
+The bug is fixed; however the tables in the above publication are slightly modified when running this script. 
+Specifically, the following tables of the paper are now:
 
                                                 Table 2
       _________________________________________________________________________________________________
