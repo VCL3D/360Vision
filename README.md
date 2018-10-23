@@ -1,2 +1,2 @@
-# DepthMetrics
-Python script for computing the depth map metrics used in: "OmniDepth: Dense Depth Estimation for Indoors Spherical Panoramas"
+# 360Vision
+Contains tools drived by reasearch in the 360<sup>o</sup> domain
