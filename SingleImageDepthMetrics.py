@@ -114,10 +114,10 @@ def scaleAvg(gt, pred):
 
 def main():
     arg_parser = arg.ArgumentParser(description = "Calculates OmniDepth's error metrics")
-    arg_parser.add_argument("-p", "--path", required = True, help = "Directory with the ground truth and the predicted "
+    arg_parser.add_argument("--path", required = True, help = "Directory with the ground truth and the predicted "
                                                                     "depth maps in .exr format, assumes that the predicted depth maps have _pred in their filename")
     args = arg_parser.parse_args()
-    PATH = args.p
+    PATH = args.path
     gt_depths = []
     pred_depths = []
     count = WIDTH * HEIGHT
