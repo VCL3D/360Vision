@@ -7,7 +7,7 @@ In Advances in neural information processing systems (pp. 2366-2374).
 The script was used for calculating the Depth Estimation errors presented in:
 
 N. Zioulis, A. Karakottas, D. Zarpalas, P. Daras, 
-"OmniDepth: Dense Depth Estimation for Indoors Spherical Panoramas", 
+"_OmniDepth: Dense Depth Estimation for Indoors Spherical Panoramas_", 
 European Conference on Computer Vision (ECCV), Munich, Germany, 8 – 14 September 2018
 
 Unfortunately, we identified a bug in the script before uploading it. 
