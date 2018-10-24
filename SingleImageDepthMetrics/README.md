@@ -54,3 +54,4 @@ python SingleImageDepthMetrics.py --path <_dir/to/depth/files_>
 
 ## Dependencies
 * OpenCV (python)
+* Numpy
