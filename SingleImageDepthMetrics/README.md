@@ -51,3 +51,6 @@ and have the same names with the Prediction files suffixed with "_pred".
   
 Just run:  
 python SingleImageDepthMetrics.py --path <_dir/to/depth/files_>
+
+## Dependencies
+* OpenCV (python)
